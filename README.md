@@ -1,4 +1,4 @@
-html5-invoice
+Fattura per regime dei minimi
 =============
 
-Creates invoices on the fly, anywhere, without any additional software.
+Template di fattura per il regime dei minimi basato su [html5-invoice](https://github.com/jonathantneal/html5-invoice)

@@ -69,7 +69,6 @@ function generateTableRow() {
 	var emptyColumn = document.createElement('tr');
 
 	emptyColumn.innerHTML = '<td><a class="cut">-</a><span contenteditable></span></td>' +
-		'<td><span contenteditable></span></td>' +
 		'<td><span data-prefix>$</span><span contenteditable>0.00</span></td>' +
 		'<td><span contenteditable>0</span></td>' +
 		'<td><span data-prefix>$</span><span>0.00</span></td>';
@@ -121,15 +120,20 @@ function updateInvoice() {
 		cells = a[i].querySelectorAll('span:last-child');
 
 		// set price as cell[2] * cell[3]
-		price = parseFloatHTML(cells[2]) * parseFloatHTML(cells[3]);
+		price = parseFloatHTML(cells[1]) * parseFloatHTML(cells[2]);
 
 		// add price to total
 		total += price;
 
 		// set row total
-		cells[4].innerHTML = price;
+		cells[3].innerHTML = price;
 	}
 
+	// rivalsa 4%
+	var rivalsa = document.querySelectorAll('table.balance td:nth-child(2) span:nth-child(2)');
+	
+	console.log((total/100)*4);
+	rivalsa[1].innerHTML = (total/100)*4;
 	// update balance cells
 	// ====================
 
@@ -140,7 +144,7 @@ function updateInvoice() {
 	cells[0].innerHTML = total;
 
 	// set balance and meta balance
-	cells[2].innerHTML = document.querySelector('table.meta tr:last-child td:last-child span:last-child').innerHTML = parsePrice(total - parseFloatHTML(cells[1]));
+	cells[2].innerHTML = document.querySelector('table.meta tr:last-child td:last-child span:last-child').innerHTML = parsePrice(total + parseFloatHTML(cells[1]));
 
 	// update prefix formatting
 	// ========================
